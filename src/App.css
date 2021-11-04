@@ -1,6 +1,7 @@
 .App{
   border: 0.1px dotted black;
   height: 100vh;
+  min-width: 279px;
   display: flex;
   flex-direction: column;
 }
