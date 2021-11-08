@@ -1,0 +1,100 @@
+.prod_card{
+    display: flex;
+    justify-content: center;
+}
+.image_box{
+    height: 338px;
+    margin: 14px 0 0 0;
+}
+.prod_card_inner{
+    width: 356px;
+    position: absolute;
+}
+.image_box{
+    background-image: url('https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-pro-family-hero?wid=940&amp;hei=1112&amp;fmt=jpeg&amp;qlt=80&amp;.v=1604021663000');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.image_box > p{
+    display: none;
+}
+.prod_card_inner > div{
+    width: 100%;
+
+}
+.title{
+    display: flex;
+    align-items: flex-end;
+}
+.title > h3{
+    font-family:'Raleway', sans-serif;
+    text-align: left;
+    font-weight: 300;
+    font-size: 18px;
+}
+.price > h3{
+    font-size: 18px;
+    font-family:'Raleway', sans-serif;
+    text-align: left;
+    font-weight: 500;
+    margin: -25px 0 0 0;
+}
+.add_cart{
+    width: 52px;
+    height: 52px;
+    margin: 323px 0 0px 260px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    display: none;
+}
+.add_cart >svg{
+    
+    cursor: pointer;
+}
+#hide{
+    display: none;
+}
+.prod_card:hover{
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    cursor: pointer;
+}
+.prod_card:hover > .add_cart{
+   display: block;
+}
+
+
+/* ---------Add when out of stock----- #out_of_stock */
+
+#out_of_stock{
+    opacity: 0.5;
+    cursor:auto;
+}
+
+#out_of_stock:hover{
+    box-shadow: none;
+}
+#out_of_stock > div >div:nth-child(1){
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-family:'Raleway', sans-serif;
+    font-weight: 300;
+    opacity: 0.5;
+}
+#out_of_stock > div >div>div{
+    display: none;
+}
+#out_of_stock > div >div:nth-child(1)>p{
+    display: flex;
+
+}
+#out_of_stock > .add_cart {
+    display: none;
+
+}
+/* ---------Add when out of stock----- */

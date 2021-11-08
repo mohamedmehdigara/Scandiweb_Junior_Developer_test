@@ -4,10 +4,12 @@
     position: absolute;
     width: 325px;
     height:auto;
-    margin: 51px -7px 0 0px;
+    margin: 51px -7px 0 -300px;
     display: flex;
     flex-direction: column;
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    z-index: 1;
+    background-color: white;
 }
 .item_cnt{
     margin: 8px 0 0 16px;
@@ -37,7 +39,7 @@
     width: 136px;
 }
 .rem_add{
-    width: 24px;
+    width: 55px;
     margin: 0 0 0 10px;
     display: flex;
     flex-direction: column;
@@ -65,10 +67,20 @@
     align-items: center;
 }
 .pic_box{
-    width: 105px;
+    width: 230px;
     height: 137px;
-    border: 0.1px dotted olive;
     margin: 0 0 0 10px;
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    display: flex;
+    justify-content: space-between;
+    background-size:100% 100%;
+}
+.pic_box > div{
+    width: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;    
+
 }
 .title{
     width: 136px;
@@ -81,6 +93,7 @@
     font-weight: 300;
     font-size: 16px;
     line-height: 24px;
+    text-align: left ;
 }
 .price{
     width: 52px;
@@ -158,11 +171,33 @@
     .cart_dropdown{
         margin: 51px 0px 0 0px;
     }
+    .pic_box{
+        width: 200px;
+    }
+    .rem_add{
+        width:43px;
+    }
 }
 @media only screen and (max-width: 480px) {
+    .pic_box{
+        width: 75%;
+       
+    }
+    .rem_add{
+        width: 40px;
+    }
+    .title_box{
+        text-align: left;
+    }
+    .total >h3{
+        font-size: 14px;
+        padding: 0 10px 0 10px;
+    }
     .cart_dropdown{
-        width: 100%;
+        width: 90%;
+        max-width: 300px;
         min-width: 290px;
+        margin: 35px -8px 0px 0px;
     }
     .item_box{
         width: auto;
@@ -172,6 +207,14 @@
     }
     .item_box{
         justify-content: center;
+        padding: 0 11px 0 0 ;
+    }
+    .buttons >div{
+        width: 130px;
+    }
+    .buttons {
+        width: 96%;
+        padding: 0 0 0 5px;
     }
    
 }
