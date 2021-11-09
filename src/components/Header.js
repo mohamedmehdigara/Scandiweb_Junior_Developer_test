@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import ToggleDisplay from 'react-toggle-element';
 import CartDropdown from './CartDropdown';
+import { SetCurrency } from '../actions/SetCurrency';
+import { GetProductList } from '../actions/ProductListAction';
+import { connect } from 'react-redux';
 import "./css/Header.css";
 
 
 
-export default class Header extends Component {
+class Header extends Component {
     constructor() {
         super();
         this.state = { showCur: false,
-                       showCart:false     };
+                       showCart:false, 
+                       currencies:["USD"]
+                    };
+
       }
-    
+      componentWillMount(){
+        this.props.getCurrency("USD")
+        }
       handleClickCur() {
         this.setState({
           showCur: !this.state.showCur,
@@ -24,7 +32,9 @@ export default class Header extends Component {
           showCur: false,
         });
       }
-
+    handleCurrencyChange(cur){
+        this.props.getCurrency(cur);
+    }
     render() {
         return (
             <div className="outer_header">
@@ -66,9 +76,13 @@ export default class Header extends Component {
                                 </svg>
                             <ToggleDisplay show={this.state.showCur}>
                             <div className="dropdwn">
-                                <div><h1>$ USD</h1></div>
-                                <div><h1>€ EUR</h1></div>
-                                <div><h1>¥ JPY</h1></div>
+                            
+                            {this.state.currencies.map(x=>{
+                              
+                               return(
+                                <div><h1>{x}</h1></div>
+                               )
+                            })}
                             </div>
                             </ToggleDisplay>
                             </div>
@@ -95,3 +109,17 @@ export default class Header extends Component {
         )
     }
 }
+const mapStateToProps = (state)=>{
+    return{
+        curCurency: state.Currency.setCurency,
+        curency_List: state.Currency.curencyList
+    }
+    }
+    
+const mapDispatchToProps = dispatch=>{
+        return{
+            getCurrency : () => dispatch(SetCurrency()),
+            dispProd : () => dispatch(GetProductList())
+        }
+    }
+export default connect(mapStateToProps,mapDispatchToProps)(Header) 

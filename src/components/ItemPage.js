@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Atributes from './Atributes';
 import "./css/ItemPage.css";
 
 
@@ -52,7 +53,7 @@ export default class ItemPage extends Component {
                                 <h3>Playstation 5</h3>
                             </div>
                             <div className="categroy_det">
-
+                            <Atributes />
                             </div>
                             <div className="price_box">
                                 <h3>PRICE:</h3>

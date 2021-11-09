@@ -17,13 +17,21 @@ export default class CartDropdown extends Component {
             <div className="item_cnt">
                 <h3>My Bag,<span> 2 items</span></h3>
             </div>
+
+
             <div className="item_box">
                 <div className="title_box">
                     <div className="title">
                         <h1>Apollo Running Short</h1>
                     </div>
                     <div className="price"><h1>$ 100</h1></div>
-                   
+                   <div className="atributes">
+                    <div className="atr_name">Size:</div>
+                    <div className="atr_values">
+                    <div>M</div>
+                    
+                    </div>
+                   </div>
                 </div>
                 <div className="rem_add">
                     <div className="plus">+</div>
