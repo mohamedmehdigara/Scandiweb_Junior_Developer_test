@@ -10,20 +10,19 @@ class Main extends Component {
         super();
         this.state = { 
            dats:[]          
-    
         };
       }
       componentWillMount(){
-        this.props.dispProd(); 
+        this.props.dispProd("all"); 
      };
-
+    
     render() {
         return (
             <div className="outer_main">
-          
                 <div className="inner_main">
                     <div className="cat_name">
-                        <h1>Categoy Name</h1>
+                        <h1>{/* {this.props.data[0].category.toUpperCase()} */}</h1>
+                        
                     </div>
                     <div className="prod_catal">
                         <div className="inner_catal">
@@ -70,7 +69,11 @@ class Main extends Component {
                                             
                                         </div>
                                         <div className="price">
-                                            <h3>{x.prices.currency}</h3>
+                                            {x.prices.map((x)=>{
+                                                return(
+                                                    x.currency===this.props.curentSymb.symb?<h3>{this.props.curentSymb.cur} {x.amount}</h3>:""
+                                                ) 
+                                            })}
                                         </div>
                                         </div>
                                         <div  className="add_cart">
@@ -102,13 +105,14 @@ class Main extends Component {
 
 const mapStateToProps = (state)=>{
 return{
+    curentSymb: state.Currency.cur,
     data: state.ProductShow.data
 }
 }
 
 const mapDispatchToProps = dispatch=>{
     return{
-        dispProd : () => dispatch(GetProductList())
+        dispProd : (cat) => dispatch(GetProductList(cat))
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Main) 

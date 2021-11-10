@@ -12,14 +12,18 @@ class Header extends Component {
     constructor() {
         super();
         this.state = { showCur: false,
-                       showCart:false, 
-                       currencies:["USD"]
+                       showCart:false,
+                       curencyLis: {
+                           "USD":"$",
+                           "GBP":"£",
+                           "AUD":"$",
+                           "JPY":"¥",
+                           "RUB":"₽"
+                                    },
+                      currentCategories:["tech","clothes","all"]
                     };
-
-      }
-      componentWillMount(){
-        this.props.getCurrency("USD")
-        }
+                }
+    
       handleClickCur() {
         this.setState({
           showCur: !this.state.showCur,
@@ -32,18 +36,20 @@ class Header extends Component {
           showCur: false,
         });
       }
-    handleCurrencyChange(cur){
-        this.props.getCurrency(cur);
-    }
+      CurrencyChange(v,k){
+        this.props.setCurrency(v,k);
+      }
     render() {
         return (
             <div className="outer_header">
                 <div className="inner_header">
                     <div className="cat_selectors">
                         <div className="inner_selectors">
-                            <div><h1>WOMEN</h1></div>
-                            <div><h1>MEN</h1></div>
-                            <div><h1>KIDS</h1></div>
+                        {this.state.currentCategories.map(x=>{
+                               return(
+                                   <div onClick={()=>this.props.dispProd(x)}><h1>{x.toUpperCase()}</h1></div>
+                               )
+                           })}
                         </div>
                     </div>
                     <div className="logo">
@@ -67,7 +73,7 @@ class Header extends Component {
                     </div>
                     <div className="cart_menu">
                         <div className="curency_box">
-                            <h1>$</h1>
+                            <h1>{this.props.curentSymb.cur}</h1>
                         </div>
                         <div className="arrow_box" >
                             <div className="arrow" onClick={()=>this.handleClickCur()}  >
@@ -76,13 +82,13 @@ class Header extends Component {
                                 </svg>
                             <ToggleDisplay show={this.state.showCur}>
                             <div className="dropdwn">
-                            
-                            {this.state.currencies.map(x=>{
-                              
-                               return(
-                                <div><h1>{x}</h1></div>
-                               )
-                            })}
+                            {
+                                Object.entries(this.state.curencyLis).map(([k,v])=>{
+                                    return(
+                                        <div onClick={()=>this.CurrencyChange(k,v)} ><h1>{v} {k}</h1></div>
+                                       )
+                                })
+                            }
                             </div>
                             </ToggleDisplay>
                             </div>
@@ -109,17 +115,17 @@ class Header extends Component {
         )
     }
 }
-const mapStateToProps = (state)=>{
-    return{
-        curCurency: state.Currency.setCurency,
-        curency_List: state.Currency.curencyList
-    }
-    }
+
     
-const mapDispatchToProps = dispatch=>{
+const mapDispatchToProps = dispatch =>{
         return{
-            getCurrency : () => dispatch(SetCurrency()),
-            dispProd : () => dispatch(GetProductList())
+            setCurrency : (k,v) => dispatch(SetCurrency(k,v)),
+            dispProd : (cat) => dispatch(GetProductList(cat))
+        }
+    }
+const mapStateToProps = (state)=>{
+        return{
+            curentSymb: state.Currency.cur
         }
     }
 export default connect(mapStateToProps,mapDispatchToProps)(Header) 

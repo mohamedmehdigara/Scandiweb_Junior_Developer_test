@@ -1,23 +1,13 @@
 const CurencyObject ={
-    curencyList : [],
-    setCurency : 'USD', 
+    symb: "USD",
+    cur: "$"
 }
 
 const CurrencyReducer = (state = CurencyObject,action) =>{
     switch(action.type){
-        case "Loading_currency":
-            return{
-                ...state,
-                loading: true,
-                errorMsg: "",
-            };
             case "Got_currencies":
                 return{
-                    ...state,
-                    loading: false,
-                    curencyList: action.payload,
-                    setCurency:"USD",
-                
+                    cur: action.data
                 }
             default:
                 return state
