@@ -13,6 +13,9 @@ class Header extends Component {
         super();
         this.state = { showCur: false,
                        showCart:false,
+                       currentCur:{
+                        name:"$",
+                        symb:"USD"},
                        curencyLis: {
                            "USD":"$",
                            "GBP":"£",
@@ -20,10 +23,10 @@ class Header extends Component {
                            "JPY":"¥",
                            "RUB":"₽"
                                     },
-                      currentCategories:["tech","clothes","all"]
+                      currentCategories:["TECH","CLOTHES","ALL"]
                     };
                 }
-    
+
       handleClickCur() {
         this.setState({
           showCur: !this.state.showCur,
@@ -38,7 +41,15 @@ class Header extends Component {
       }
       CurrencyChange(v,k){
         this.props.setCurrency(v,k);
+        this.setState({
+            currentCur:{
+            name:k,
+            symb:v
+            },
+        })
       }
+     
+   
     render() {
         return (
             <div className="outer_header">
@@ -73,7 +84,7 @@ class Header extends Component {
                     </div>
                     <div className="cart_menu">
                         <div className="curency_box">
-                            <h1>{this.props.curentSymb.cur}</h1>
+                            <h1>{this.state.currentCur.name}</h1>
                         </div>
                         <div className="arrow_box" >
                             <div className="arrow" onClick={()=>this.handleClickCur()}  >

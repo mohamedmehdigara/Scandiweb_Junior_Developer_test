@@ -23,6 +23,7 @@ const ProductShowReducer = (state = DefaultState,action) =>{
                     ...state,
                     loading: false,
                     data: action.payload,
+                    category: action.cat,
                     errorMsg: "",
                 }
             default:

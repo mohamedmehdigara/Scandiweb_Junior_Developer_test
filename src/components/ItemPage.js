@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import Atributes from './Atributes';
+import { request, gql } from 'graphql-request';
+import parse from 'html-react-parser';
 import "./css/ItemPage.css";
+import { connect } from 'react-redux';
 
 
-export default class ItemPage extends Component {
+
+ class ItemPage extends Component {
     constructor() {
         super();
         this.state = { backgroundImage:"https://images-na.ssl-images-amazon.com/images/I/510VSJ9mWDL._SL1262_.jpg",
+                        item_data:[],
                         images: [ "https://images-na.ssl-images-amazon.com/images/I/510VSJ9mWDL._SL1262_.jpg",
                         "https://images-na.ssl-images-amazon.com/images/I/610%2B69ZsKCL._SL1500_.jpg",
                         "https://images-na.ssl-images-amazon.com/images/I/51iPoFwQT3L._SL1230_.jpg",
@@ -18,10 +23,135 @@ export default class ItemPage extends Component {
         this.setState({
             backgroundImage:link
         })
-    }  
+    } 
+    getLinkId(){
+       return window.location.href.split('$').pop().split('*')[0];
+    }
+    
+    componentDidMount(){
+            const query = gql`
+            {
+                product(id:"${this.getLinkId()}"){
+                    id
+                    gallery
+                    name
+                    attributes{
+                        id
+                        name
+                        items{
+                          value
+                          id
+                        }
+                      }
+                    description
+                    brand 
+                    prices{
+                      currency
+                      amount
+                    }
+                
+                }
+              }
+            `
+            request('http://localhost:4000/', query).then(data =>{
+                
+              this.setState({
+                  item_data: data,
+                  images: data.product.gallery,
+                  backgroundImage: data.product.gallery[0]
+              })
+            });
+            
+
+
+
+
+
+
+        }
+        
+
     render() {
-        return (
+    if(this.state.item_data === null){
+        return <h1>...Loading </h1>
+    }else{
+      return(
+        <div className="spec_prod_box">
+       {Object.entries(this.state.item_data).map(([k,v])=>{
+        return( <div className="spec_center_peace">
+            <div className="spec_img_box">
+                            <div className="picture_buttons">
+                                
+                                {
+                                this.state.images.map(x=>{
+                                   return(
+                                    <div onClick={()=>this.setMainPic(x)} className="btn_pic">
+                                    <img src={x} alt="" />
+                                </div>
+                                   )
+                                }) } 
+                            </div>
+                            
+                                <div className="spc_pic">
+                                    <div className="pic" style={{ backgroundImage: `url(${this.state.backgroundImage})` }}>
+                                       
+                                    </div>
+                                </div>
+                            
+            </div>
+            <div className="spec_info_box">
+                <div className="info_center_box">
+                    <div className="title_box">
+                        <h1>{v.brand}</h1>
+                        <h3>{v.name}</h3>
+                    </div>
+                    <div className="categroy_det"> 
+                    <Atributes data={v.attributes} />
+                    </div>
+                    <div className="price_box">
+                        <h3>PRICE:</h3>
+                        {v.prices.map(x=>{
+                            if(x.currency===this.props.curentSymb.symb){
+                                return <h4>{this.props.curentSymb.cur} {x.amount}</h4>
+                            }
+                        })}
+                       
+                    </div>
+                    <div className="spec_add_cart">
+                            <h4>ADD TO CART</h4>
+                    </div>
+                    <div className="description_spec">
+                       {parse(v.description)}
+                   
+                    
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+       )})}
+    </div>
+      )
+    }
+    }
+}
+
+const mapStateToProps = (state)=>{
+    return{
+        curentSymb: state.Currency.cur
+    }
+}
+export default connect(mapStateToProps,null)(ItemPage) 
+
+
+
+
+
+
+
+            /* 
             <div className="spec_prod_box">
+                {console.log(this.state.item_data)}
                 <div className="spec_center_peace">
                     <div className="spec_img_box">
                                     <div className="picture_buttons">
@@ -49,8 +179,8 @@ export default class ItemPage extends Component {
                     <div className="spec_info_box">
                         <div className="info_center_box">
                             <div className="title_box">
-                                <h1>Sony</h1>
-                                <h3>Playstation 5</h3>
+                                <h1></h1>
+                                <h3></h3>
                             </div>
                             <div className="categroy_det">
                             <Atributes />
@@ -78,7 +208,4 @@ export default class ItemPage extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
-        )
-    }
-}
+            </div> */

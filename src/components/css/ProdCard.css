@@ -7,7 +7,7 @@
     margin: 14px 0 0 0;
 }
 .prod_card_inner{
-    width: 356px;
+    width: 320px;
     position: absolute;
 }
 .image_box{
@@ -34,6 +34,7 @@
     text-align: left;
     font-weight: 300;
     font-size: 18px;
+    color: black;
 }
 .price > h3{
     font-size: 18px;
@@ -41,6 +42,7 @@
     text-align: left;
     font-weight: 500;
     margin: -25px 0 0 0;
+    color: black;
 }
 .add_cart{
     width: 52px;
@@ -91,6 +93,7 @@
 }
 #out_of_stock > div >div:nth-child(1)>p{
     display: flex;
+    color: black;
 
 }
 #out_of_stock > .add_cart {

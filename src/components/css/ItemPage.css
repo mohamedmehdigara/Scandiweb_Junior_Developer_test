@@ -54,7 +54,7 @@
     overflow-x: hidden;
     overflow-y: hidden;
     white-space: nowrap;
-    width: 95%;  
+    width: 80%;  
     height: 95%;
     background-size:100% 100%;
 }
@@ -135,7 +135,8 @@ li{
         margin: 0 7px 10px 0;
     }
     .spc_pic > .pic{
-        min-width: 400px;
+       
+        width: 80%;
     }
 }
 
@@ -190,13 +191,15 @@ li{
         width:70%
     }
     .spc_pic > .pic{
-        max-width: 400px;
+        max-width: 327px;
     }
 }
-@media only screen and (max-width: 390px) {
-
+@media only screen and (max-width: 500px) {
+    .title_box >h3{
+        font-size: 20px;
+    }
     .spc_pic > .pic{
-        max-width: 355px;
+        max-width: 305px;
         min-width: 305px;
         width: 100%;
     }

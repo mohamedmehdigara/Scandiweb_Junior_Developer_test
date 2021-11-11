@@ -70,7 +70,7 @@
 }
 @media only screen and (max-width: 480px) {
     .inner_main{
-        margin: 50px 0 0 0;
+        margin: 50px 0 0 10px;
       }
     .cat_name{
         margin: 0px 0 0 0 ;

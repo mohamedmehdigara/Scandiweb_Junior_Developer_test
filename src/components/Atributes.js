@@ -6,13 +6,18 @@ export default class Atributes extends Component {
     render() {
         return (
             <div className="atribute_inner"> 
+           
+            {Object.entries(this.props.data).map(([k,v])=>{
+                return(
                 <div className="atr_box">
-                    <h3>SIZE:</h3>
+                    <h3>{v.name.toUpperCase()}:</h3>
                     <div>
-                    <div className="display_val">S</div> 
-                    <div className="display_val">M</div>      
+                    {v.items.map(a=>{
+                        return(<div className="display_val">{a.value}</div> )
+                    })}      
                     </div>
                 </div>
+            )})}
             </div>
         )
     }

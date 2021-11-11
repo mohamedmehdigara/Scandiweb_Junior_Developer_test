@@ -21,7 +21,7 @@ class App extends React.Component{
         <Routes>
        <Route path="/" element ={<Main />} />
        <Route path="/cart" element ={<Cart /> } />
-       <Route path="/ipage" element ={<ItemPage/> } />
+       <Route path="/item/:id" element={<ItemPage />} />
        </ Routes>
        
         </div>

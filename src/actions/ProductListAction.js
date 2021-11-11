@@ -4,8 +4,6 @@ import { request, gql } from 'graphql-request';
 
 
 export const GetProductList = (category) => dispatch => {
-  console.log("this works");
-  console.log(category)
     try{
         dispatch({
             type:"List_loading",
@@ -44,12 +42,13 @@ export const GetProductList = (category) => dispatch => {
           
           const emptObj = [];       
           data.category.products.map(x=>{
-            x.category===category?emptObj.push(x):console.log("pass");
+            x.category===category.toLowerCase()?emptObj.push(x):console.log();
+            return "";
           })
-          console.log(emptObj);
           dispatch({
             type:"List_sucseeded",
-            payload: category != "all"?emptObj:data.category.products
+            payload: category !== "ALL"?emptObj:data.category.products,
+            cat : category
         }) 
       }
         );

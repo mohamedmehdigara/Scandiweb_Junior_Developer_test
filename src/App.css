@@ -9,3 +9,9 @@
   width: 85%;
   max-width: 1800px;
 }
+@media only screen and (max-width: 480px) {
+  .wrapper{
+    width: 98%;
+    margin: 0 0 0 5px;
+  }
+}
