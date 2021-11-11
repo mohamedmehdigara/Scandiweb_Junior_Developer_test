@@ -1,28 +1,20 @@
 const DefaultState = {
-    loading:false,
     data:[],
+    count:0,
     errorMsg:'',
 }
-
 const ProductCartReducer = (state = DefaultState,action) =>{
     switch(action.type){
-        case "List_loading":
-            return{
-                ...state,
-                loading: true,
-                errorMsg: "",
-            };
-            case "List_loading_failed":
+            case "Cart_add_failed":
                 return{
                     ...state,
-                    loading:false,
-                    errorMsg:"unable to get list"
+                    errorMsg:"unable to add"
             };
-            case "List_sucseeded":
+            case "added_to_cart":
                 return{
                     ...state,
-                    loading: false,
-                    data: action.payload.results,
+                    data: action.cart,
+                    cnt: action.count,
                     errorMsg: "",
                 }
             default:

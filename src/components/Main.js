@@ -19,7 +19,9 @@ class Main extends Component {
       componentDidMount(){
 
         this.props.dispProd("ALL");
-        this.props.setCurrency("USD","$"); 
+        console.log(this.props.curentSymb.symb);
+        typeof(this.props.curentSymb.symb)=== "undefined"?this.props.setCurrency("USD","$"):console.log('got cur');
+        console.log(this.props.curentSymb.symb);
 
      };
     
@@ -49,7 +51,9 @@ class Main extends Component {
                                             
                                         </div>
                                         <div className="price">
+                                         
                                             {x.prices.map((x)=>{
+                                              
                                                 return(
                                                     x.currency===this.props.curentSymb.symb?<h3>{this.props.curentSymb.cur} {x.amount}</h3>:""
                                                 ) 

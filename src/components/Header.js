@@ -4,6 +4,10 @@ import CartDropdown from './CartDropdown';
 import { SetCurrency } from '../actions/SetCurrency';
 import { GetProductList } from '../actions/ProductListAction';
 import { connect } from 'react-redux';
+import {
+    Link,
+  } from "react-router-dom";
+
 import "./css/Header.css";
 
 
@@ -48,7 +52,15 @@ class Header extends Component {
             },
         })
       }
-     
+    handleLink(category,curency,symbol){
+        this.props.dispProd(category);
+        this.setState({
+            currentCur:{
+            name:curency,
+            symb:symbol
+            },
+        })
+    }
    
     render() {
         return (
@@ -58,7 +70,7 @@ class Header extends Component {
                         <div className="inner_selectors">
                         {this.state.currentCategories.map(x=>{
                                return(
-                                   <div onClick={()=>this.props.dispProd(x)}><h1>{x.toUpperCase()}</h1></div>
+                                <div onClick={()=>this.handleLink(x,this.props.curentSymb.cur,this.props.curentSymb.symb)}><h1><Link to="/">{x.toUpperCase()}</Link></h1></div>
                                )
                            })}
                         </div>
@@ -84,7 +96,7 @@ class Header extends Component {
                     </div>
                     <div className="cart_menu">
                         <div className="curency_box">
-                            <h1>{this.state.currentCur.name}</h1>
+                            <h1>{this.props.curentSymb.cur}</h1>
                         </div>
                         <div className="arrow_box" >
                             <div className="arrow" onClick={()=>this.handleClickCur()}  >

@@ -39,6 +39,7 @@ import { connect } from 'react-redux';
                         id
                         name
                         items{
+                          displayValue
                           value
                           id
                         }
@@ -106,19 +107,7 @@ import { connect } from 'react-redux';
                         <h3>{v.name}</h3>
                     </div>
                     <div className="categroy_det"> 
-                    <Atributes data={v.attributes} />
-                    </div>
-                    <div className="price_box">
-                        <h3>PRICE:</h3>
-                        {v.prices.map(x=>{
-                            if(x.currency===this.props.curentSymb.symb){
-                                return <h4>{this.props.curentSymb.cur} {x.amount}</h4>
-                            }
-                        })}
-                       
-                    </div>
-                    <div className="spec_add_cart">
-                            <h4>ADD TO CART</h4>
+                    <Atributes data={v.attributes} prices={v.prices} id={v.id} />
                     </div>
                     <div className="description_spec">
                        {parse(v.description)}
