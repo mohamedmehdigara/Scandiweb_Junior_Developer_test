@@ -2,38 +2,73 @@ import React, { Component } from 'react'
 import "./css/Atributes.css";
 import "./css/ItemPage.css";
 import { connect } from 'react-redux';
+import { SetCurrency } from '../actions/SetCurrency';
+import {AddToCart} from "../actions/ShoppingCartAction"
 
 class Atributes extends Component {
     constructor() {
         super();
         this.state = {
             itemID:'',
-            atribs:{},
-            price:0
+            atribs:{},     
+            price:0,
+            notSelectError:false
+            
     };
       }
-    handleAddToCart(id,atributes){
-        console.log(id,atributes)
+    componentDidMount(){
+        typeof(this.props.curentSymb.symb)=== "undefined"?this.props.setCurrency("USD","$"):console.log('');
     }
-    handleAtrSelector(atr_name,atr_val){
-       this.state.atribs[atr_name] = atr_val;
-       console.log(this.state.atribs)
-    }
-    render() {
-        return (
-            <div className="atribute_inner"> 
-           
-            {Object.entries(this.props.data).map(([k,v])=>{
+    atributeIndicator(atributes,id){
+        let indicator = '';
+        Object.entries(atributes).map(([k,v])=>{
+            indicator +=`${v}`;
         
+        })
+        return indicator + id;
+    }
+    handleAddToCart(id,pricePack,brand,gallery,name,dataCount){
+        const atrib = {...this.state.atribs,};
+        let itemCount = 1;
+        const indicator = this.atributeIndicator(this.state.atribs,id)
+        const Cart ={
+            atrib,
+            id,
+            pricePack,
+            brand,
+            gallery,
+            name,
+            indicator,
+            itemCount,
+        };
+        if(Object.keys(atrib).length<dataCount){
+            this.setState({notSelectError : true})
+        }else{
+            this.setState({notSelectError : false});
+            this.props.sendToCart(Cart);
+        }
+    }
+    handleAtrSelector(atr_name,atr_val,box_name,e){
+        this.state.atribs[atr_name]= atr_val;
+        this.handleHighlight(box_name,e);
+    }
+    handleHighlight(box_name,e){
+        var parentDiv = document.querySelector(`.${box_name}`);
+        parentDiv.querySelectorAll('*').forEach(n => n.setAttribute('style',"color:black; background-color:white;"));
+        e.target.setAttribute('style',"color:white; background-color:black;")
+    }
+    render() {   
+        return (
+            <div className="atribute_inner">
+            {Object.entries(this.props.data).map(([k,v])=>{
                 return(
                 <div className="atr_box">
                     
                     <h3>{v.name.toUpperCase()}:</h3>
-                    <div>
+                    <div className={v.name.replace(/\s/g, "")}>
                     
                     {v.items.map(a=>{
-                        
-                        return( <div onClick={()=>this.handleAtrSelector(v.name,a.displayValue)} className="display_val">{a.displayValue}</div> )
+                        return( <div onClick={(e)=>this.handleAtrSelector(v.name,a.displayValue,v.name.replace(/\s/g, ""),e)}  className="display_val">{a.displayValue}</div> )
                     })}      
                     </div>
                 </div>
@@ -46,12 +81,14 @@ class Atributes extends Component {
                             if(x.currency===this.props.curentSymb.symb){
                                 return <h4>{this.props.curentSymb.cur} {x.amount}</h4>
                             }
+                            return ""
+                            
                         })}
                        
             </div>
-                    <div onClick={()=>this.handleAddToCart(this.props.id,this.state.atribs)} className="spec_add_cart">
-                            <h4>ADD TO CART</h4>
-                    </div>
+                
+                {this.state.notSelectError?<p style={{color:"red",fontSize:"15px",textAlign:"center"}}>You need to select all atributes</p>:""}
+                {this.props.inStock?<div onClick={()=>this.handleAddToCart(this.props.id,this.props.prices,this.props.brand,this.props.gallery,this.props.name,this.props.data.length)} className="spec_add_cart"><h4>ADD TO CART</h4></div>:<div style={{backgroundColor:"gray"}} className="spec_add_cart"><h4>Out of Stock</h4></div>}
                    
             </div>
             
@@ -61,7 +98,13 @@ class Atributes extends Component {
 
 const mapStateToProps = (state)=>{
     return{
-        curentSymb: state.Currency.cur
+        curentSymb: state.Currency.cur,
     }
 }
-export default connect(mapStateToProps,null)(Atributes) 
+const mapDispatchToProps = dispatch=>{
+    return{
+        setCurrency : (k,v) => dispatch(SetCurrency(k,v)),
+        sendToCart: (item) => dispatch(AddToCart(item))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Atributes) 

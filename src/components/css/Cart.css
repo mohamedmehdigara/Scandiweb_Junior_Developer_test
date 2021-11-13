@@ -22,7 +22,7 @@
 .cart_item{
     display: flex;
     justify-content: space-between;
-    height: 186px;
+    height: auto;
     border-top: 1px solid rgba(229, 229, 229, 1);
     margin: 20px 0 0 0;
    
@@ -90,6 +90,31 @@ margin: 0 -10px 0 0 ;
 .cart_item_inner_image_cnt > div{
     margin: 10px 0 0 10px;
 }
+.atrib_box{
+    width: auto;
+    height: 46px;
+    margin: 15px 0 0 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.atrib_box > div{
+    width: 63px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:0.1px solid black;
+    background-color: black;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    margin: 19px 8px 0 0;
+
+}
+
+
+
 
 
 

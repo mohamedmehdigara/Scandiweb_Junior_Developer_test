@@ -130,6 +130,19 @@
 .inner_selectors > div >h1 > a:hover{
     color: rgba(94, 206, 123, 1);
 }
+.cart_count{
+    position: absolute;
+    margin: -14px 0 0 16px;
+    font-size: 13px;
+    text-align: center;
+    color: white;
+}
+.cart_count > p{
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    background-color: black;
+}
 
 
 @media only screen and (max-width: 1100px) {
@@ -216,6 +229,7 @@
     }
 
 }
+
 @media only screen and (max-width: 380px) {
     .inner_header{
         width: 94%;

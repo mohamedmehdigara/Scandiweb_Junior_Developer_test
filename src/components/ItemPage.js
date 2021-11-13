@@ -35,6 +35,7 @@ import { connect } from 'react-redux';
                     id
                     gallery
                     name
+                    inStock
                     attributes{
                         id
                         name
@@ -62,13 +63,6 @@ import { connect } from 'react-redux';
                   backgroundImage: data.product.gallery[0]
               })
             });
-            
-
-
-
-
-
-
         }
         
 
@@ -82,7 +76,6 @@ import { connect } from 'react-redux';
         return( <div className="spec_center_peace">
             <div className="spec_img_box">
                             <div className="picture_buttons">
-                                
                                 {
                                 this.state.images.map(x=>{
                                    return(
@@ -92,13 +85,10 @@ import { connect } from 'react-redux';
                                    )
                                 }) } 
                             </div>
-                            
                                 <div className="spc_pic">
-                                    <div className="pic" style={{ backgroundImage: `url(${this.state.backgroundImage})` }}>
-                                       
+                                    <div className="pic" style={{ backgroundImage: `url(${this.state.backgroundImage})` }}> 
                                     </div>
-                                </div>
-                            
+                                </div>                   
             </div>
             <div className="spec_info_box">
                 <div className="info_center_box">
@@ -107,14 +97,11 @@ import { connect } from 'react-redux';
                         <h3>{v.name}</h3>
                     </div>
                     <div className="categroy_det"> 
-                    <Atributes data={v.attributes} prices={v.prices} id={v.id} />
+                    <Atributes data={v.attributes} prices={v.prices} id={v.id} inStock={v.inStock} brand={v.brand} gallery={v.gallery} name={v.name} />
                     </div>
                     <div className="description_spec">
                        {parse(v.description)}
-                   
-                    
                     </div>
-                    
                 </div>
             </div>
         </div>

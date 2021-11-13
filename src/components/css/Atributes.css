@@ -25,3 +25,7 @@
 .atr_box> div{
     display: flex;
 }
+#active_btn{
+    color: white;
+    background-color:black;
+}

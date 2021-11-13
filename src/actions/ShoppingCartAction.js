@@ -1,11 +1,18 @@
 
 
-export const GetProductList = (item) => dispatch => {
-    const cartItems = [];
-    cartItems.push(item);
+export const AddToCart = (item) => dispatch => {
+
     dispatch({
-        type:"added_to_cart",
-        cart: cartItems,
-        count: cartItems.length
+        type:"add_to_cart",
+        cart: item,
       });
+
+}
+export const RemoveFromCart = (item) => dispatch => {
+
+  dispatch({
+      type:"remove_from_cart",
+      itemId: item,
+    });
+
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import "./css/CartDropdown.css";
-
+import {
+    Link,
+  } from "react-router-dom";
 
 
 
@@ -48,7 +50,7 @@ export default class CartDropdown extends Component {
                         <h3>$ 100.00</h3>
                     </div>
                     <div className="buttons">
-                        <div className="cart_view" onClick={()=>window.location.href="/cart"}><h5>VIEW CART</h5></div>
+                        <div className="cart_view"><Link to={`/cart`}><h5>VIEW CART</h5></Link></div>
                         <div className="checkout"><h5>CHECKOUT</h5></div>
                     </div>
                 </div>
