@@ -15,7 +15,7 @@ To  run this project:
 <br>
 *Clone this repo...
 <br>
-#`npm init`
+#`npm install`
 <br>
 #`npm start`
 <br>
