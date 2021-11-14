@@ -19,6 +19,12 @@ To  run this project:
 <br>
 #`npm start`
 <br>
+// curently endpoint -- http://localhost:4000/
+<br>
+// endpoints set in  src/actions/ProductListAction.js
+<br>
+// endpoints set in  src/components/ItemPage.js
+<br>
 
 
 
