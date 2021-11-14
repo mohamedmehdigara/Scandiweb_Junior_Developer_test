@@ -48,6 +48,7 @@
 .btn_pic > img{
     width: 99%;
     height: 99%;
+    z-index: -5;
 }
 .spc_pic >.pic{
     display: flex;
@@ -56,7 +57,9 @@
     white-space: nowrap;
     width: 80%;  
     height: 95%;
-    background-size:100% 100%;
+    background-size:93% 93%;
+    z-index: -5;
+    background-repeat: no-repeat;
 }
 .info_center_box{
     width:350px;
@@ -113,6 +116,11 @@
     font-size: 16px;
     color: white;
     font-weight: 600;
+    
+}
+.spec_add_cart:hover{
+    box-shadow: 0px 4px 35px rgba(84, 85, 87, 0.19);
+    cursor: pointer;
 }
 .description_spec{
     margin:40px 0 0 0;
@@ -139,6 +147,10 @@ li{
         width: 80%;
     }
 }
+#overlay{
+    z-index: -10;
+    }
+    
 
 @media only screen and (max-width: 1100px) {
     .spec_center_peace{

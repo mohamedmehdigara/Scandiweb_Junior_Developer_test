@@ -10,19 +10,20 @@ import {
 import ItemPage from './components/ItemPage';
 import Cart from './components/Cart';
 
+
 class App extends React.Component{
   render(){
     return (
       
       <div className="App">
-        <div className="wrapper">
- 
+        <div  className="wrapper">
+    
         <Header />
         <Routes>
-       <Route path="/" element ={<Main />} />
-       <Route path="/cart" element ={<Cart /> } />
-       <Route path="/item/:id" element={<ItemPage />} />
-       </ Routes>
+        <Route path="/" element ={<Main />} />
+        <Route path="/cart" element ={<Cart /> } />
+        <Route path="/item/:id" element={<ItemPage />} />
+      </ Routes>
        
         </div>
       </div>
@@ -31,4 +32,6 @@ class App extends React.Component{
   }
 } 
 
-export default App;
+  
+  
+  export default App 

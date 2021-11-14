@@ -1,45 +1,58 @@
 import _ from 'lodash';
 
+const  giveEmptyval=()=>{
+    return ""
+}
+const UpdateCartData =(WhatToCount)=>{
+const indicatorsEmpt = [];
+WhatToCount.map(a=>indicatorsEmpt.push(a.indicator));
+const countPairs =_.countBy(indicatorsEmpt);
+WhatToCount.map(x=>{
+    for(const [key,val] of Object.entries(countPairs)){
+        x.indicator === key?x.itemCount = val:giveEmptyval();
+    }
+    return ''
+});
+}
+const RemoveItem =(cart,what)=>{
+const deletableIndexes =[];
+let counter = 0;
+cart.map(x=>{
+x.indicator.includes(what)?deletableIndexes.push(counter):++counter;
+return '';
+});
+cart.splice(deletableIndexes[0],1)
+
+}
+
 const DefaultState = {
-    indicators:[],
     cart:[],
-    count:0
+    count:0,
+    OpenMiniCart:false
 }
 const ProductCartReducer = (state = DefaultState,action) =>{
     switch(action.type){
             case "add_to_cart":
                 state.cart.push(action.cart);
-                state.indicators.push(action.cart.indicator);
-                const countPairs =_.countBy(state.indicators);
-                state.cart.map(x=>{
-                    for(const [key,val] of Object.entries(countPairs)){
-                        x.indicator === key?x.itemCount = val:console.log('');
-                    }
-                });
+                UpdateCartData(state.cart);
                 return{
                     ...state,
                     cart: state.cart,
                     count:state.cart.length,
                 };
             case"remove_from_cart":
-               /*  console.log(action.itemId); */
-                console.log(typeof action.itemId);
-                let counter = 0;
-                while(counter < state.cart.length){
-                 
-                    if(state.cart[counter].indicator.includes(action.itemId)){
-                        console.log("boom")
-                        console.log(counter)
-                        console.log("boom")
-                        break;
-                    }
-                    ++counter;
-                
-                }
+              
+                RemoveItem(state.cart,action.itemId);
+                UpdateCartData(state.cart);
                 return{
                     ...state,
                     cart: state.cart,
                     count:state.cart.length,
+                };
+            case "openClose_minicart":
+                return{
+                    ...state,
+                    OpenMiniCart: action.stateOfMinicart
                 };
             default:
                 return state

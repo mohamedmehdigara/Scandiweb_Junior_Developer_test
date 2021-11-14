@@ -4,11 +4,22 @@
   min-width: 279px;
   display: flex;
   justify-content: center;
+ 
 }
 .wrapper{
   width: 85%;
   max-width: 1800px;
 }
+.overlay{
+  width: 1000vw;
+  margin: 88px 0 0 -15%;
+  height: 130vh;
+  z-index: -1;
+  position: absolute;
+  background-color: black;
+  opacity: 0.4;
+}
+
 @media only screen and (max-width: 480px) {
   .wrapper{
     width: 98%;

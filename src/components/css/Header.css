@@ -131,16 +131,20 @@
     color: rgba(94, 206, 123, 1);
 }
 .cart_count{
+    
     position: absolute;
-    margin: -14px 0 0 16px;
+    margin: -18px 0 0 11px;
     font-size: 13px;
     text-align: center;
     color: white;
 }
 .cart_count > p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
-    height: 15px;
-    width: 15px;
+    height: 19px;
+    width: 19px;
     background-color: black;
 }
 

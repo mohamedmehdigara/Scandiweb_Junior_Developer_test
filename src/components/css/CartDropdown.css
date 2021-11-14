@@ -4,16 +4,16 @@
     position: absolute;
     width: 325px;
     height:auto;
-    margin: 51px -7px 0 -300px;
+    margin: 60px -7px 0 -300px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+   
     z-index: 1;
     background-color: white;
 }
 .item_cnt{
     margin: 8px 0 0 16px;
-    width:118px;
+    width:160px;
     height: 26px;
     display: flex;
     align-items: center;
@@ -37,6 +37,9 @@
 }
 .title_box{
     width: 136px;
+}
+.title_box > h1 > span{
+ font-weight: 600;
 }
 .rem_add{
     width: 55px;
@@ -96,7 +99,7 @@
     text-align: left ;
 }
 .price{
-    width: 52px;
+    width: auto;
     height: 26px;
     display: flex;
     align-items: center;
@@ -151,6 +154,19 @@
     border: 1px solid rgba(29, 31, 34, 1);
    
 }
+.cart_view > a{
+    text-decoration: none;
+    color: black;
+} 
+.cart_view > a > h5{
+  
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+.cart_view > a:hover > h5{
+    color: white;
+}
 .buttons >div:hover{
     cursor: pointer;
     color: white;
@@ -184,9 +200,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 15px;
+    width: 24px;
+    height: 24px;
     font-size: 9px;
     border: 0.1px solid black;
+}
+.atrib_vals > div{
+    color: black;
+    font-size: 1em;
 }
 
 

@@ -3,6 +3,7 @@ import ToggleDisplay from 'react-toggle-element';
 import CartDropdown from './CartDropdown';
 import { SetCurrency } from '../actions/SetCurrency';
 import { GetProductList } from '../actions/ProductListAction';
+import {OpenCloseMinicart} from '../actions/ShoppingCartAction';
 import { connect } from 'react-redux';
 import {
     Link,
@@ -30,18 +31,23 @@ class Header extends Component {
                       currentCategories:["TECH","CLOTHES","ALL"]
                     };
                 }
-
+    
       handleClickCur() {
         this.setState({
           showCur: !this.state.showCur,
           showCart: false,
         });
+        this.props.OpenCloseMini(false);
+        
       }
       handleClickCart() {
-        this.setState({
-          showCart: !this.state.showCart,
-          showCur: false,
-        });
+          this.props.OpenCloseMini(!this.props.Minicart.OpenMiniCart);
+          this.setState({
+            showCur: false,
+           
+          });
+
+
       }
       CurrencyChange(v,k){
         this.props.setCurrency(v,k);
@@ -57,9 +63,13 @@ class Header extends Component {
         this.setState({
             currentCur:{
             name:curency,
-            symb:symbol
+            symb:symbol,
             },
+        showCart: false,    
+        showCur: false,  
         })
+
+        this.props.OpenCloseMini(false);
     }
    
     render() {
@@ -75,6 +85,7 @@ class Header extends Component {
                            })}
                         </div>
                     </div>
+                    
                     <div className="logo">
                     <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_150:357)">
@@ -112,14 +123,14 @@ class Header extends Component {
                                        )
                                 })
                             }
+                          
                             </div>
                             </ToggleDisplay>
                             </div>
                         </div>
                         <div className="cart_box">
                         <div className="cart_logo" onClick={()=>this.handleClickCart()}>
-                        {this.props.cartCount !== 0?<div className="cart_count"><p>{this.props.cartCount}</p></div>:console.log("")}
-                        {/* <div className="cart_count"><p>{this.props.cartCount}</p></div> */}
+                        {this.props.cartCount !== 0?<div className="cart_count"><p>{this.props.cartCount}</p></div>:""}
                         <svg width="20" height="20" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         
                             <path d="M19.5613 3.87359C19.1822 3.41031 18.5924 3.12873 17.9821 3.12873H5.15889L4.75914 1.63901C4.52718 0.773016 3.72769 0.168945 2.80069 0.168945H0.653099C0.295301 0.168945 0 0.450523 0 0.793474C0 1.13562 0.294459 1.418 0.653099 1.418H2.80069C3.11654 1.418 3.39045 1.61936 3.47434 1.92139L6.04306 11.7077C6.27502 12.5737 7.07451 13.1778 8.00152 13.1778H16.4028C17.3289 13.1778 18.1507 12.5737 18.3612 11.7077L19.9405 5.50575C20.0877 4.941 19.9619 4.33693 19.5613 3.87365L19.5613 3.87359ZM18.6566 5.22252L17.0773 11.4245C16.9934 11.7265 16.7195 11.9279 16.4036 11.9279H8.00154C7.68569 11.9279 7.41178 11.7265 7.32789 11.4245L5.49611 4.39756H17.983C18.1936 4.39756 18.4042 4.49824 18.5308 4.65948C18.6567 4.81994 18.7192 5.0213 18.6567 5.22266L18.6566 5.22252Z" fill="#43464E"/>
@@ -133,13 +144,17 @@ class Header extends Component {
                              </g>
                         </svg>
                         </div>
-                        <ToggleDisplay show={this.state.showCart}>
+                        <ToggleDisplay show={this.props.cartCount!==0?this.props.Minicart.OpenMiniCart:""}>
                             <CartDropdown />
                         </ToggleDisplay>
                         </div>
                     </div>
                 </div>
+                <div id={this.props.cartCount!==0&&this.props.Minicart.OpenMiniCart?'':'hide'}  className="overlay">
+          
+                </div>
             </div>
+            
         )
     }
 }
@@ -148,13 +163,15 @@ class Header extends Component {
 const mapDispatchToProps = dispatch =>{
         return{
             setCurrency : (k,v) => dispatch(SetCurrency(k,v)),
-            dispProd : (cat) => dispatch(GetProductList(cat))
+            dispProd : (cat) => dispatch(GetProductList(cat)),
+            OpenCloseMini: (bool) => dispatch(OpenCloseMinicart(bool))
         }
     }
 const mapStateToProps = (state)=>{
         return{
             cartCount: state.CartReducer.count,
-            curentSymb: state.Currency.cur
+            curentSymb: state.Currency.cur,
+            Minicart : state.CartReducer
         }
     }
 export default connect(mapStateToProps,mapDispatchToProps)(Header) 

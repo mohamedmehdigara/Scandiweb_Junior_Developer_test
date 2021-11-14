@@ -16,14 +16,18 @@ class Atributes extends Component {
             
     };
       }
+    giveEmptyval(){
+        return ""
+    }
     componentDidMount(){
-        typeof(this.props.curentSymb.symb)=== "undefined"?this.props.setCurrency("USD","$"):console.log('');
+        typeof(this.props.curentSymb.symb)=== "undefined"?this.props.setCurrency("USD","$"):this.giveEmptyval();
     }
     atributeIndicator(atributes,id){
         let indicator = '';
         Object.entries(atributes).map(([k,v])=>{
             indicator +=`${v}`;
-        
+            return ''
+    
         })
         return indicator + id;
     }
@@ -48,14 +52,21 @@ class Atributes extends Component {
             this.props.sendToCart(Cart);
         }
     }
-    handleAtrSelector(atr_name,atr_val,box_name,e){
+    handleAtrSelector(atr_name,atr_val,box_name,color,e){
+
         this.state.atribs[atr_name]= atr_val;
-        this.handleHighlight(box_name,e);
+        this.handleHighlight(box_name,color,e);
     }
-    handleHighlight(box_name,e){
+    handleHighlight(box_name,color,e){
         var parentDiv = document.querySelector(`.${box_name}`);
+        
         parentDiv.querySelectorAll('*').forEach(n => n.setAttribute('style',"color:black; background-color:white;"));
-        e.target.setAttribute('style',"color:white; background-color:black;")
+        if(color.includes("#")){
+            e.target.setAttribute('style',`color:${color==='#FFFFFF'?'black':'white'}; background-color:${color};`)
+        }else{
+            e.target.setAttribute('style',`color:white; background-color:black;`)
+        }
+       
     }
     render() {   
         return (
@@ -68,7 +79,7 @@ class Atributes extends Component {
                     <div className={v.name.replace(/\s/g, "")}>
                     
                     {v.items.map(a=>{
-                        return( <div onClick={(e)=>this.handleAtrSelector(v.name,a.displayValue,v.name.replace(/\s/g, ""),e)}  className="display_val">{a.displayValue}</div> )
+                        return( <div onClick={(e)=>this.handleAtrSelector(v.name,a.value,v.name.replace(/\s/g, ""),a.value,e)}  className="display_val">{a.value.includes("#")?a.displayValue:a.value}</div> )
                     })}      
                     </div>
                 </div>

@@ -44,6 +44,13 @@
     height: 444px;
     margin: 0 0px 40px 0px;
 }
+#hide{
+    display:none;
+    overflow: hidden;
+}
+#overlay{
+    z-index: -10;
+}
 
 
 

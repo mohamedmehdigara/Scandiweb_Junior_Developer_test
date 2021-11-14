@@ -16,3 +16,11 @@ export const RemoveFromCart = (item) => dispatch => {
     });
 
 }
+export const OpenCloseMinicart = (bool) => dispatch => {
+
+  dispatch({
+      type:"openClose_minicart",
+      stateOfMinicart: bool,
+    });
+
+}
