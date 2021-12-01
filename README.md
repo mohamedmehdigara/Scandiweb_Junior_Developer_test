@@ -21,7 +21,8 @@ To  run this project:
 <br>
 // curently endpoint -- http://localhost:4000/
 <br>
-// endpoints set in  src/actions/ProductListAction.js
+// endpoints set in  src/GraphQl/GqlFunctions.js 
+
 <br>
 // endpoints set in  src/components/ItemPage.js
 <br>
