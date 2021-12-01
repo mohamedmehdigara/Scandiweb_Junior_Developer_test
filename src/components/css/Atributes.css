@@ -17,6 +17,10 @@
     font-size: 15px;
     font-weight: 400;
 }
+ #selected{
+     color: white;
+     background-color: black;
+ }
 .display_val:hover{
    
     cursor: pointer;
@@ -34,4 +38,15 @@
 #active_btn{
     color: white;
     background-color:black;
+}
+#selectedCol{
+    color: gray;
+    transform: rotate(28deg);
+    font-size: 100%; 
+    display: flex;
+    font-family: 'Raleway', sans-serif;
+}
+#atributeError{
+    color: red;
+    text-align: center;
 }

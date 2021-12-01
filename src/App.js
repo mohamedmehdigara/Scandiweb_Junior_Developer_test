@@ -17,7 +17,6 @@ class App extends React.Component{
       
       <div className="App">
         <div  className="wrapper">
-    
         <Header />
         <Routes>
         <Route path="/" element ={<Main />} />

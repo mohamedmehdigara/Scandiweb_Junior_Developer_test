@@ -51,7 +51,9 @@
 #overlay{
     z-index: -10;
 }
-
+#title_main{
+    height: 55px;
+}
 
 
 
@@ -77,7 +79,7 @@
 }
 @media only screen and (max-width: 480px) {
     .inner_main{
-        margin: 50px 0 0 10px;
+        margin: 50px 0 0 0px;
       }
     .cat_name{
         margin: 0px 0 0 0 ;
@@ -87,9 +89,15 @@
     }
     .prod_card_inner > div{
         width: 90%;
-        margin: 0 0 0 14px;
+        margin: 0 0 0 0px;
     }
     .prod_card_inner{
         width: 319px;
+    }
+    .outer_main{
+        width: 100%;
+    }
+    .inner_div{
+        width: 100%;
     }
 }

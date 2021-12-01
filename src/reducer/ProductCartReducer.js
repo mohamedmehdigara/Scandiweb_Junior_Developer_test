@@ -1,59 +1,44 @@
-import _ from 'lodash';
-
-const  giveEmptyval=()=>{
-    return ""
-}
-const UpdateCartData =(WhatToCount)=>{
-const indicatorsEmpt = [];
-WhatToCount.map(a=>indicatorsEmpt.push(a.indicator));
-const countPairs =_.countBy(indicatorsEmpt);
-WhatToCount.map(x=>{
-    for(const [key,val] of Object.entries(countPairs)){
-        x.indicator === key?x.itemCount = val:giveEmptyval();
-    }
-    return ''
-});
-}
-const RemoveItem =(cart,what)=>{
-const deletableIndexes =[];
-let counter = 0;
-cart.map(x=>{
-x.indicator.includes(what)?deletableIndexes.push(counter):++counter;
-return '';
-});
-cart.splice(deletableIndexes[0],1)
-
-}
+import { RemoveItem, GiveCartData, UpdateAtributes, countOfItems} from '../DataWork/dataChanger';
 
 const DefaultState = {
     cart:[],
     count:0,
-    OpenMiniCart:false
+    OpenMiniCart:false,
+    OpenCurreny:false
 }
+
 const ProductCartReducer = (state = DefaultState,action) =>{
     switch(action.type){
             case "add_to_cart":
-                state.cart.push(action.cart);
-                UpdateCartData(state.cart);
+               GiveCartData(state.cart,action.cart);
                 return{
                     ...state,
                     cart: state.cart,
-                    count:state.cart.length,
+                    count: countOfItems(state.cart),
                 };
             case"remove_from_cart":
-              
-                RemoveItem(state.cart,action.itemId);
-                UpdateCartData(state.cart);
-                return{
+                RemoveItem(state.cart,action.item);
+                return{ 
                     ...state,
                     cart: state.cart,
-                    count:state.cart.length,
+                    count: countOfItems(state.cart),
                 };
+            case "update_cart_atributes":
+                    return{
+                        ...state,
+                        cart: UpdateAtributes(action.id,state.cart,action.atributes),
+                        };
             case "openClose_minicart":
                 return{
                     ...state,
                     OpenMiniCart: action.stateOfMinicart
                 };
+            case "openClose_currency":
+                return{
+                    ...state,
+                    OpenCurreny: action.stateOfCurrenyBox
+                    };
+            
             default:
                 return state
     }

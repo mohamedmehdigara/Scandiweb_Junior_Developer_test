@@ -1,99 +1,68 @@
 import React, { Component } from 'react'
 import "./css/CartDropdown.css";
-import {
-    Link,
-  } from "react-router-dom";
-  import { connect } from 'react-redux';
-  import "./css/Cart.css";
-  import { SetCurrency } from '../actions/SetCurrency';
-  import { RemoveFromCart,AddToCart  } from '../actions/ShoppingCartAction';
-  import {OpenCloseMinicart} from '../actions/ShoppingCartAction';
-  import _ from 'lodash';
+import {Link} from "react-router-dom";
+import { connect } from 'react-redux';
+import { SetCurrency } from '../actions/SetCurrency';
+import {OpenCloseMinicart} from '../actions/ShoppingCartAction';
+import { calculateSum, GiveCorrectPrice,empt } from '../DataWork/dataChanger';
+import MinicartItem from './MinicartItem';
+import "./css/Cart.css";
 
 
 
  class CartDropdown extends Component {
-
-    calculateSum(){
-        let sum = 0;
-        this.props.cart.map(i=>{
-            i.pricePack.map(a=>{
-                if(a.currency===this.props.curentSymb.symb){
-                    sum += a.amount
-                }
-                return ""
-            })
-            return''
-        })
-       return sum.toFixed(2)
+    constructor() {
+        super();
+        this.closeDropdownCart = this.closeDropdownCart.bind(this);
+        this.state = {
+            indicator:'.'
+        };
+        }
+    closeDropdownCart(event){
+        const parentComp = document.querySelector('.cart_dropdown_main');
+        const buttonComp =document.querySelector('.cart_box');
+        !parentComp.contains(event.target)&&!buttonComp.contains(event.target)?this.props.OpenCloseMini(false):empt();
     }
-    render() {
-        this.calculateSum();   
-        return (
-            <div className="cart_dropdown" >    
-            <div className="item_cnt">
-                <h3>My Bag,<span> {this.props.cartCount} items</span></h3>
-            </div>
-            
-            {_.uniqWith(this.props.cart, _.isEqual).map(item=>{
-              
-                return(
-                    <div className="item_box">
-                    <div className="title_box">
-                        <div className="title">
-                            <h1><span>{item.brand}</span>{item.name}</h1>
-                        </div>
-                        <div className="price">
-                        {item.pricePack.map(curency=>{
-                            if(curency.currency===this.props.curentSymb.symb){
-        
-                                return <h1>{this.props.curentSymb.cur} {(curency.amount * item.itemCount).toFixed(2)}</h1>
-                            }
-                            return "" 
-                        })}
-                        </div>
-                        
-                       <div className="atributes">
-                        <div className="atr_values">
-                        {
-                            Object.entries(item.atrib).map(([k,v])=>{
-                               return(
-                                <div className="atrib_vals" style={v.includes('#')?{backgroundColor:`${v}`}:{backgroundColor:"white"}}>
-                                        <div>{v.includes('#')?'':v}</div>
-                                </div>
-                               )
-                            })   
-                        }
+    componentDidMount(){
+        document.addEventListener('mousedown',this.closeDropdownCart);
                      
-                        </div>
-                       </div>
-                    </div>
-                    <div className="rem_add">
-                        <div  onClick={()=>this.props.sendToCart(item)} className="plus">+</div>
-                        <div className="count">{item.itemCount}</div>
-                        <div onClick={()=>this.props.removeItem(item.indicator)} className="minus">-</div>
-                    </div>
-                    <div className="pic_box" style={{ backgroundImage: `url(${item.gallery[0]})` }}>
+    }
+    componentWillUnmount(){
+        document.removeEventListener('mousedown',this.closeDropdownCart)
+    }
+    removeItem(indicator){
+        this.props.cartCount === 1?this.props.OpenCloseMini(false):empt();
+        this.props.removeItem(indicator);
+    }
+
+    render() {
+        return (
+        <div className="cart_dropdown_outer">
+            <div className="cart_dropdown_main" >    
+                <div className="cart_count_box">
+                    <div className="cart_count_dropdown"><h1>My Bag, <span>{this.props.cartCount} items</span></h1></div>
+                </div>
+                {this.props.cart.map((x,key)=>{
+                    return  <MinicartItem key={key} thisItem={x} price={GiveCorrectPrice(x.prices,this.props.curentSymb)}id={x.cartId} imageLink={x.gallery[0]} name={x.name} brand={x.brand} atributes={x.attributes} selectedAtr={x.selectedAtributes} itemCount={x.itemCount} />
+                })}
+                <div className="total_sum_box">
+                    <div className="total_sum">
+                        <h3>Total:</h3>
+                        <h3>{calculateSum(this.props.cart,this.props.curentSymb)}</h3>
                     </div>
                 </div>
-    
-                )
-
-            })}
-      
-
-            
-
-
-            <div className="checkout_controll">
-                <div className="total_box">
-                    <div className="total">
-                        <h3>Total</h3>
-                        <h3>{this.props.curentSymb.cur} {this.calculateSum()} </h3>
+                <div className="button_box_outer">
+                <Link to={`/cart`}>
+                    <div className="button_cart">
+                        <div>
+                            <h5>VIEW BAG</h5>
+                        </div>
                     </div>
-                    <div className="buttons">
-                        <div className="cart_view"><Link onClick={()=>this.props.OpenCloseMini(false)} to={`/cart`}><h5>VIEW CART</h5></Link></div>
-                        <div className="checkout"><h5>CHECKOUT</h5></div>
+                    </Link>
+                    <div className="button_checkout">
+                        <div>
+                            <h5>CHECK OUT</h5>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -104,8 +73,6 @@ import {
 const mapDispatchToProps = dispatch =>{
     return{
         setCurrency : (k,v) => dispatch(SetCurrency(k,v)),
-        removeItem: (id)=> dispatch(RemoveFromCart(id)),
-        sendToCart: (item) => dispatch(AddToCart(item)),
         OpenCloseMini: (bool) => dispatch(OpenCloseMinicart(bool))
     }
 }
@@ -118,3 +85,10 @@ const mapStateToProps = (state)=>{
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(CartDropdown) 
+
+
+
+
+
+
+

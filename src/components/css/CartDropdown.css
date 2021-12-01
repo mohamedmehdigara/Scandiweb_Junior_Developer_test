@@ -1,268 +1,120 @@
-
-
-.cart_dropdown{
-    position: absolute;
-    width: 325px;
-    height:auto;
-    margin: 60px -7px 0 -300px;
+.cart_dropdown_outer{
+    margin: 60px 0 0 0;
+    position:absolute;
+    width: 358px;
+    height: auto;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+.cart_dropdown_main{
+    width: 93%;
     display: flex;
     flex-direction: column;
-   
-    z-index: 1;
-    background-color: white;
 }
-.item_cnt{
-    margin: 8px 0 0 16px;
-    width:160px;
+.cart_count_box{
+    margin: 8px 0 23px 0;
+    width: 100%;
     height: 26px;
     display: flex;
     align-items: center;
 }
-.item_cnt > h3 {
-    font-family:'Raleway', sans-serif;
-    font-size: 16px;
-   
+.cart_count_dropdown{
+    display: flex;
+    align-items: center;
+
 }
-.item_cnt > h3 > span{
-    font-family:'Raleway', sans-serif;
+.cart_count_dropdown > h1{
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    color: black;
+    font-weight: 700;
+}
+.cart_count_dropdown > h1 > span{
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    color: black;
     font-weight: 500;
-    font-size: 16px;
-}
-.item_box{
-    width: 293px;
-    height: 137px;
-    margin: 20px 0 0 16px;
-    display: flex;
-    justify-content: flex-end;
-}
-.title_box{
-    width: 136px;
-}
-.title_box > h1 > span{
- font-weight: 600;
-}
-.rem_add{
-    width: 55px;
-    margin: 0 0 0 10px;
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-}
-.rem_add > .plus{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 24px;
-    border: 1px solid #1D1F22;
-}
-.rem_add > .minus{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 24px;
-    border: 1px solid #1D1F22;
 }
 
-.count{
+.total_sum_box{
+    height: 26px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 0 35px 0;
+}
+.total_sum{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.total_sum > h3{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+.button_box_outer{
+    height: 43px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 20px 0;
+}
+.button_cart{
+    width: 150px;
+    height: 100%;
+}
+.button_cart > div{
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.pic_box{
-    width: 230px;
-    height: 137px;
-    margin: 0 0 0 10px;
-    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-    display: flex;
-    justify-content: space-between;
-    background-size:100% 100%;
-}
-.pic_box > div{
-    width: 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;    
-
-}
-.title{
-    width: 136px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-}
-.title > h1{
-    font-family:'Raleway', sans-serif;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: left ;
-}
-.price{
-    width: auto;
-    height: 26px;
-    display: flex;
-    align-items: center;
-}
-.price >h1{
-    font-family:'Raleway', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-}
-.checkout_controll{
-    margin: 42px 0 20px 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-.total_box{
-    height: auto;
-    width: 289px;
-    display: flex;
-    flex-direction: column;
-}
-.total{
-    height: 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 35px 0;
-   
-}
-.total > h3{
-    font-family:'Raleway', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-}
-.buttons{
-    width: 100%;
-    height: 43px;
-    display: flex;
-    justify-content: space-between;
-}
-.buttons > div > h5{
-    font-family:'Raleway', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-}
-.buttons >div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 140px;
-    height: 43px;
-    border: 1px solid rgba(29, 31, 34, 1);
-   
-}
-.cart_view > a{
-    text-decoration: none;
-    color: black;
-} 
-.cart_view > a > h5{
-  
     font-family: 'Raleway', sans-serif;
+    color: black;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
+    border: 1px solid black;
 }
-.cart_view > a:hover > h5{
-    color: white;
+.button_checkout{
+    width: 150px;
 }
-.buttons >div:hover{
-    cursor: pointer;
+.button_checkout > div{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    color: black;
+    font-size: 14px;
+}
+.button_cart > div:hover {
     color: white;
     background-color: rgba(94, 206, 123, 1);
-    border: 1px solid rgba(94, 206, 123, 1);
-}
-.checkout{
-    width: 141px;
-    height: 44px;
-}
-.plus:hover{
+    border:none;
     cursor: pointer;
 }
-.minus:hover{
+.button_checkout > div:hover {
+    color: white;
+    background-color: rgba(94, 206, 123, 1);
+    border:none;
     cursor: pointer;
 }
-.atributes{
-    width: 100%;
-    height: auto;
-    font-family:'Raleway', sans-serif;
-    margin: 10px 0 0 0;
-    font-size: 15px;
-}
-.atr_values{
-    font-family:'Raleway', sans-serif;
-    display: flex;
-    flex-direction: row;
-}
-.atr_values > div{
-    margin: 5px 5px 0 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 24px;
-    height: 24px;
-    font-size: 9px;
-    border: 0.1px solid black;
-}
-.atrib_vals > div{
-    color: black;
-    font-size: 1em;
-}
 
 
 
 
 
-
-@media only screen and (max-width: 1100px) {
-    .cart_dropdown{
-        margin: 51px 0px 0 0px;
+@media only screen and (max-width: 1400px){
+ 
     }
-    .pic_box{
-        width: 200px;
-    }
-    .rem_add{
-        width:43px;
-    }
-}
-@media only screen and (max-width: 480px) {
-    .pic_box{
-        width: 75%;
+@media only screen and (max-width: 1100px){
        
     }
-    .rem_add{
-        width: 40px;
+@media only screen and (max-width: 480px){
+        
     }
-    .title_box{
-        text-align: left;
-    }
-    .total >h3{
-        font-size: 14px;
-        padding: 0 10px 0 10px;
-    }
-    .cart_dropdown{
-        width: 90%;
-        max-width: 300px;
-        min-width: 290px;
-        margin: 35px -8px 0px 0px;
-    }
-    .item_box{
-        width: auto;
-    }
-    .title_box{
-        width: 50%;
-    }
-    .item_box{
-        justify-content: center;
-        padding: 0 11px 0 0 ;
-    }
-    .buttons >div{
-        width: 130px;
-    }
-    .buttons {
-        width: 96%;
-        padding: 0 0 0 5px;
-    }
-   
-}
