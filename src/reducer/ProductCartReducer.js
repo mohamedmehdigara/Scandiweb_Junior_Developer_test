@@ -18,6 +18,7 @@ const ProductCartReducer = (state = DefaultState,action) =>{
                 };
             case"remove_from_cart":
                 RemoveItem(state.cart,action.item);
+             
                 return{ 
                     ...state,
                     cart: state.cart,

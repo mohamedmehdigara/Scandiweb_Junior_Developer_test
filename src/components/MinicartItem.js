@@ -51,9 +51,9 @@ class MinicartItem extends Component {
                                                  style={setAtribColor(item.value)} id="colorsize"
                                                  >{isSelectedColor(this.props.selectedAtr,val.name,item.value)}</div>
                                             }
-                                            return <div key={key} 
-                                             onClick={()=>this.updateAtributes(this.props.selectedAtr,val.name,item.value,this.props.id)}
-                                             id={isSelected(this.state.selectedAtributes,val.name,item.value)?'selected':''} >{item.value}</div>
+                                            return <div key={key}
+                                             id={isSelected(this.state.selectedAtributes,val.name,item.value)?'selected':''}
+                                             onClick={()=>this.updateAtributes(this.props.selectedAtr,val.name,item.value,this.props.id)}>{item.value}</div>
                                         
                                         })}
                                     </div>

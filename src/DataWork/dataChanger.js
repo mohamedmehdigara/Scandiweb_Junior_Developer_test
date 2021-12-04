@@ -7,13 +7,12 @@ export const empt=()=>{
     return ''
 }
 // exports selected category data to dipatcher ---> 
-export const categoryProductList = (category,productList) =>{
+export const categoryProductList = (productList) =>{
 const Categorized = [];
-const All = []
 productList.forEach(element => {
-    element.category === category?Categorized.push(element):All.push(element);
+Categorized.push(element);
 });
-return  category==="all"?All:Categorized;
+return  Categorized;
 }
 
 // calculate sum for cart  ---> 
@@ -89,6 +88,7 @@ export const isSelectedColor = (selAtributes,name,value)=>{
         return ''
     }
 }
+
 // set background for color Attributes --->
 export const  setAtribColor =(color)=>{
     return {backgroundColor:color}

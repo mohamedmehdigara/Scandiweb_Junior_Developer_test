@@ -9,33 +9,36 @@ const endPoint = ' http://localhost:4000/';
 export const GetProductListData = async (category) => {
     const query = gql`
     {
-        category{
-         products{
-         id
-         brand 
-         name
-         category
-         attributes{
-            id
-            name
-            items{
-              displayValue
-              value
-              id
-            }
+        category(input:{
+          title:"${category!=="all"?category:''}"
+        }){
+          products{
+             id
+               brand 
+               name
+               category
+               attributes{
+                  id
+                  name
+                  items{
+                    displayValue
+                    value
+                    id
+                  }
+                }
+               gallery
+               inStock
+               prices{
+                currency
+                amount
+              }
           }
-         gallery
-         inStock
-         prices{
-           currency
-           amount
-                    }
         }
-        }
-        }
+      }
     `
     try {
-        const data = await request(endPoint, query).then(data=> categoryProductList(category,data.category.products));
+        const data = await request(endPoint, query).then(data=> categoryProductList(data.category.products));
+        console.log(data)
         return data
     } catch (error) {
         console.log(error)

@@ -52,7 +52,7 @@ import "./css/Cart.css";
                     </div>
                 </div>
                 <div className="button_box_outer">
-                <Link to={`/cart`}>
+                <Link onClick={()=>this.props.OpenCloseMini(false)} to={`/cart`}>
                     <div className="button_cart">
                         <div>
                             <h5>VIEW BAG</h5>
